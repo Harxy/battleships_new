@@ -24,8 +24,7 @@ class Board
       if boathash[guess].is_a?(Boat)
         boathash[guess].hit
         boathash[guess] = 'H'
-      
-        if boathash.values.include?(Boat)
+        if no_boats_left(boathash)
           return "All boats sunk - OPPONENT WINS!"
         else
           return :hit
@@ -64,6 +63,11 @@ class Board
     array = loc.split('')
     array[1].next!
     loc = array[0].to_s + array[1].to_s
+  end
+
+  def no_boats_left(boathash)
+    boathash.values.each { |item| return false if item.class != String }
+    return true
   end
 
 end
